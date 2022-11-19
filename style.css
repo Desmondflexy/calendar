@@ -1,0 +1,122 @@
+body {
+  font-family: helvetica, arial, sans-serif;
+  padding: 0 20px 30px 20px;
+  min-width: 355px;
+  max-width: 600px;
+  margin: 10px auto;
+  position: relative;
+}
+
+.calendar {
+  font-family: cursive, Helvetica, sans-serif;
+}
+.calendar h1 {
+  position: relative;
+  background-color: green;
+  padding: 10px;
+  text-align: center;
+  color: #fff;
+  border-radius: 20px 0;
+}
+.calendar h1 .btn {
+  position: absolute;
+  top: 20%;
+  height: 60%;
+  border-radius: 40%;
+  text-shadow: 2px 2px 5px rgb(35, 35, 46);
+  border: 0;
+  background-color: transparent;
+  font-size: 1.2em;
+  line-height: 0;
+  padding: 0;
+  color: lightgreen;
+  cursor: pointer;
+}
+.calendar h1 .btn:active {
+  text-shadow: 0 0 2px rgb(35, 35, 46);
+  color: greenyellow;
+}
+.calendar h1 .prev {
+  left: 30px;
+}
+.calendar h1 .next {
+  right: 30px;
+}
+.calendar ul {
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  padding-left: 0;
+}
+.calendar ul li:nth-child(7n) {
+  color: blue;
+}
+.calendar ul li:nth-child(7n-1) {
+  color: red;
+}
+.calendar .weekdays {
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  color: green;
+  padding: 5px;
+}
+.calendar .days li {
+  text-align: right;
+  border: 2px solid green;
+  background-color: rgba(0, 200, 0, 0.1);
+  border-radius: 10px 0;
+  padding: 5px 30% 5px 5px;
+}
+
+form fieldset {
+  border-radius: 10px;
+  padding: 0 20px;
+}
+form legend {
+  background-color: black;
+  color: #ffffff;
+  padding: 8px;
+}
+form input:invalid:required {
+  background-color: lightpink;
+}
+form ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+form .form {
+  display: flex;
+  gap: 5px;
+}
+form .form li {
+  flex: 1 auto;
+  background-color: lightgreen;
+}
+form .form li button {
+  width: 100%;
+  height: 100%;
+}
+form .form li label {
+  display: inline-block;
+  padding: 5px;
+}
+
+footer {
+  display: inline;
+  font-family: Helvetica, monospace;
+  font-size: 12px;
+  padding: 3px;
+  text-decoration: underline;
+  font-weight: 600;
+  position: absolute;
+  bottom: 0;
+  left: 20px;
+}
+footer:hover {
+  cursor: pointer;
+  background-color: white;
+  text-decoration: none;
+}/*# sourceMappingURL=style.css.map */

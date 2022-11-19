@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>A simple calendar</title>
+    <script defer src="script.js"></script>
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <form>
+        <fieldset>
+            <legend>Select month, input year and click enter</legend>
+            <ul class="form">
+                <li>
+                    <label for="month">Month</label>
+                    <select id="month" name="month"></select>
+                </li>
+                <li><label for="year">Year</label><input id="year" max="2100" min="1582" required type="number"></li>
+                <li><button>enter</button></li>
+            </ul>
+        </fieldset>
+    </form>
+
+    <div class="calendar">
+        <h1>
+            <button class="prev btn">&lt;</button>
+            <span class="month-year"></span>
+            <button class="next btn">&gt;</button>
+        </h1>
+        <ul class="weekdays"></ul>
+        <ul class="days"></ul>
+    </div>
+    <footer></footer>
+
+</body>
+
+</html>
