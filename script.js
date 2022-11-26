@@ -85,7 +85,7 @@ yearInput.addEventListener('input', () => {
 // Changes the time display on the red footer every second
 setInterval(() => {
     now = new Date();
-    timeNow.textContent = `NOW - ${now.toDateString()}, ${now.toLocaleTimeString()}`;
+    timeNow.textContent = `${now.toDateString()}, ${now.toLocaleTimeString()}`;
 }, 1000);
 
 //
@@ -155,7 +155,8 @@ function createCalendar(month, year) {
         day.textContent = i.toString();
         days.appendChild(day);
         if (Number(year) === now.getFullYear() && month === months[now.getMonth()] && i === now.getDate()) {
-            day.style.backgroundColor = 'orange';
+            day.style.backgroundColor = '#7FFFD4';
+            day.style.boxShadow = '2px 2px 5px gray'
             day.style.border = '0';
         }
     }

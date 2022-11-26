@@ -3,6 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A simple calendar</title>
     <script defer src="script.js"></script>
     <link href="style.css" rel="stylesheet">
@@ -13,14 +15,19 @@
     <form>
         <fieldset>
             <legend>Select month, input year and click enter</legend>
-            <ul class="form">
-                <li>
+            <div class="container">
+                <div>
                     <label for="month">Month</label>
-                    <select id="month" name="month"></select>
-                </li>
-                <li><label for="year">Year</label><input id="year" max="2100" min="1582" required type="number"></li>
-                <li><button>enter</button></li>
-            </ul>
+                    <select class="input" id="month" name="month"></select>
+                </div>
+                <div>
+                    <label for="year">Year</label>
+                    <input class="input" id="year" max="2100" min="1582" required type="number">
+                </div>
+                <div id="submit">
+                    <button>Enter</button>
+                </div>
+            </div>
         </fieldset>
     </form>
 

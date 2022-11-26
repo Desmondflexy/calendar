@@ -1,47 +1,126 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: helvetica, arial, sans-serif;
-  padding: 0 20px 30px 20px;
-  min-width: 355px;
-  max-width: 600px;
-  margin: 10px auto;
+  padding: 20px 10px;
   position: relative;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+fieldset {
+  border-radius: 5px;
+  padding: 0 20px;
+  padding: 10px;
+}
+
+legend {
+  background-color: #4c4c4c;
+  color: #ffffff;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+input:invalid:required {
+  background-color: lightpink;
+}
+
+.container {
+  display: flex;
+  gap: 5px;
+  justify-content: space-between;
+}
+
+.container>div {
+  flex: 1 auto;
+  background-color: lightgreen;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+.input {
+  border: none;
+  border-radius: 4px;
+  height: 25px;
+  padding: 2px;
+  font-size: .9em;
+}
+
+label {
+  font-size: .9em;
+}
+
+#submit {
+  padding: 0;
+}
+
+#submit>button {
+  background-color: #ccc;
+  box-shadow: 2px 2px 5px gray;
+  width: 100%;
+  height: 100%;
+  border: none;
+  cursor: pointer;
+}
+
+#submit>button:active {
+  box-shadow: 1px 1px 0px gray;
+  background-color: #eee;
+}
+
+#submit>button:hover{
+  background-color: aliceblue;
 }
 
 .calendar {
-  font-family: cursive, Helvetica, sans-serif;
+  margin: 20px 0;
 }
-.calendar h1 {
+
+.calendar>* {
+  margin: 10px 0;
+}
+
+h1 {
   position: relative;
   background-color: green;
-  padding: 10px;
+  padding: 8px 30px;
   text-align: center;
   color: #fff;
-  border-radius: 20px 0;
+  border-radius: 8px;
 }
-.calendar h1 .btn {
+
+h1 .btn {
   position: absolute;
   top: 20%;
   height: 60%;
-  border-radius: 40%;
   text-shadow: 2px 2px 5px rgb(35, 35, 46);
   border: 0;
-  background-color: transparent;
+  background: none;
   font-size: 1.2em;
   line-height: 0;
-  padding: 0;
   color: lightgreen;
   cursor: pointer;
+  opacity: .5;
 }
-.calendar h1 .btn:active {
+
+h1 .btn:active {
   text-shadow: 0 0 2px rgb(35, 35, 46);
-  color: greenyellow;
+  color: #fff;
+  opacity: 1;
 }
-.calendar h1 .prev {
-  left: 30px;
+
+h1 .prev {
+  left: 10px;
 }
-.calendar h1 .next {
-  right: 30px;
+
+h1 .next {
+  right: 10px;
 }
+
 .calendar ul {
   list-style-type: none;
   display: grid;
@@ -49,13 +128,16 @@ body {
   gap: 1px;
   padding-left: 0;
 }
-.calendar ul li:nth-child(7n) {
+
+.calendar li:nth-child(7n) {
   color: blue;
 }
-.calendar ul li:nth-child(7n-1) {
+
+.calendar li:nth-child(7n-1) {
   color: red;
 }
-.calendar .weekdays {
+
+.weekdays {
   text-align: center;
   background-color: rgba(0, 0, 0, 0.1);
   border-top: 2px solid;
@@ -63,60 +145,29 @@ body {
   color: green;
   padding: 5px;
 }
-.calendar .days li {
+
+.days li {
   text-align: right;
-  border: 2px solid green;
+  border: 1px solid green;
   background-color: rgba(0, 200, 0, 0.1);
-  border-radius: 10px 0;
+  border-radius: 5px;
   padding: 5px 30% 5px 5px;
 }
 
-form fieldset {
-  border-radius: 10px;
-  padding: 0 20px;
-}
-form legend {
-  background-color: black;
-  color: #ffffff;
-  padding: 8px;
-}
-form input:invalid:required {
-  background-color: lightpink;
-}
-form ul {
-  list-style-type: none;
-  padding-left: 0;
-}
-form .form {
-  display: flex;
-  gap: 5px;
-}
-form .form li {
-  flex: 1 auto;
-  background-color: lightgreen;
-}
-form .form li button {
-  width: 100%;
-  height: 100%;
-}
-form .form li label {
-  display: inline-block;
-  padding: 5px;
-}
-
 footer {
-  display: inline;
-  font-family: Helvetica, monospace;
-  font-size: 12px;
-  padding: 3px;
+  font-size: .8em;
   text-decoration: underline;
   font-weight: 600;
-  position: absolute;
-  bottom: 0;
-  left: 20px;
+  background-color: #7FFFD4;
+  text-align: center;
+  padding: 4px;
 }
+
 footer:hover {
   cursor: pointer;
-  background-color: white;
   text-decoration: none;
-}/*# sourceMappingURL=style.css.map */
+}
+
+footer:active {
+  color: red;
+}
