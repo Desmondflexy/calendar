@@ -144,19 +144,17 @@ function createCalendar(month, year) {
     // Fill blank days of month
     for (let i = 1; i <= (countdays - daysOfMonth) % 7; i++) {
         const day = document.createElement('li');
-        day.textContent = '';
-        day.style.backgroundColor = 'white';
-        day.style.borderColor = 'lightgreen';
+        day.id = 'empty-day';
         days.appendChild(day);
     }
     // Fill numbered days of month
     for (let i = 1; i <= daysOfMonth; i++) {
         const day = document.createElement('li');
-        day.innerHTML = `<a href="${onthisday(i, month, year)}" target="_blank">${i}</a>`
+        day.innerHTML = `<a href="${googleSearch(i, month, year)}">${i}</a>`
         days.appendChild(day);
         if (Number(year) === now.getFullYear() && month === months[now.getMonth()] && i === now.getDate()) {
             day.id = 'today';
-            day.innerHTML = `<a href="https://www.britannica.com/on-this-day" target="_blank">${i}</a>`
+            day.innerHTML = `<a href="https://www.britannica.com/on-this-day">${i}</a>`
         }
     }
 
@@ -164,26 +162,13 @@ function createCalendar(month, year) {
 }
 
 /**What happened on this day - onthisday.com*/
-function onthisday(day, month, year){
+function onthisday(day, month, year) {
     const query = `${year}/${month}/${day}`;
     return 'https://www.onthisday.com/date/' + query;
 }
 
 /**Search this date on google.com */
-function googleSearch(day, month, year){
+function googleSearch(day, month, year) {
     const query = `${day}+${month}+${year}`;
     return 'https://www.google.com/search?q=' + query;
 }
-
-// -------------- end
-
-
-/* // Observation
-
-let A = 0;
-setInterval(() => {
-    A = 10;  // has no effect on A in global scope
-}, 1000);
-console.log(A);  // output is 0 instead of 10... dunno why ):
-
-// */
