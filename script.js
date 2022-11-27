@@ -152,18 +152,28 @@ function createCalendar(month, year) {
     // Fill numbered days of month
     for (let i = 1; i <= daysOfMonth; i++) {
         const day = document.createElement('li');
-        day.textContent = i.toString();
+        day.innerHTML = `<a href="${googleSearch(i, month, year)}" target="_blank">${i}</a>`
         days.appendChild(day);
         if (Number(year) === now.getFullYear() && month === months[now.getMonth()] && i === now.getDate()) {
-            day.style.backgroundColor = '#7FFFD4';
-            day.style.boxShadow = '2px 2px 5px gray'
-            day.style.border = '0';
+            day.id = 'today';
+            day.innerHTML = `<a href="https://www.britannica.com/on-this-day" target="_blank">${i}</a>`
         }
     }
 
     console.log("All's good with createCalendar :)")
 }
 
+/**What happened on this day - onthisday.com*/
+function onthisday(day, month, year){
+    const query = `${year}/${month}/${day}`;
+    return 'https://www.onthisday.com/date/' + query;
+}
+
+/**Search this date on google.com */
+function googleSearch(day, month, year){
+    const query = `${day}+${month}+${year}`;
+    return 'https://www.google.com/search?q=' + query;
+}
 
 // -------------- end
 
