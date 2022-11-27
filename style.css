@@ -161,7 +161,6 @@ h1 .next {
   color: unset;
   text-decoration: none;
   cursor: default;
-  font-size: 1.5em;
 }
 
 .days li a:active {
