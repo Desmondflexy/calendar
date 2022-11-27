@@ -152,11 +152,11 @@ function createCalendar(month, year) {
     // Fill numbered days of month
     for (let i = 1; i <= daysOfMonth; i++) {
         const day = document.createElement('li');
-        day.innerHTML = `<a href="${onthisday(i, month, year)}" target="_blank">${i}</a>`
+        day.innerHTML = `<a href="${onthisday(i, month, year)}">${i}</a>`
         days.appendChild(day);
         if (Number(year) === now.getFullYear() && month === months[now.getMonth()] && i === now.getDate()) {
             day.id = 'today';
-            day.innerHTML = `<a href="https://www.britannica.com/on-this-day" target="_blank">${i}</a>`
+            day.innerHTML = `<a href="https://www.britannica.com/on-this-day">${i}</a>`
         }
     }
 
