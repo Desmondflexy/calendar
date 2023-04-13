@@ -20,11 +20,11 @@ const months = [
 ];
 
 // Populate month select button with options
-for (let month of months) {
+months.forEach(month => {
     const option = document.createElement('option')
     option.textContent = option.value = month;
     selectMonth.appendChild(option)
-}
+})
 
 // Display current calendar date on page load.
 let now = new Date();
