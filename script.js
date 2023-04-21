@@ -88,10 +88,8 @@ setInterval(() => {
     timeNow.textContent = `${now.toDateString()}, ${now.toLocaleTimeString()}`;
 }, 1000);
 
-//
+/**List out the number of days in month of year. */
 function createCalendar(month, year) {
-    /* List out the number of days in month of year. */
-
     // Validates inputs entered from the browser console. Just for debugging sakes.
     if (!(months.includes(month)) || year < 1582 || year > 2100) {
         console.log('Error in createCalendar: Invalid input.')
@@ -113,7 +111,7 @@ function createCalendar(month, year) {
     }
 
     let countdays = 0, daysOfMonth, flag = false;
-    // This loop counts the days from 1900 up to the month in the given year
+    // This loop counts the days from 1 up to the month in the given year
     for (let yyyy = 1; yyyy <= year; yyyy++) {
         for (let mm = 0; mm < 12; mm++) {
             if (mm === 1) {  // February
@@ -157,8 +155,6 @@ function createCalendar(month, year) {
             day.innerHTML = `<a href="https://www.britannica.com/on-this-day">${i}</a>`
         }
     }
-
-    console.log("All's good with createCalendar :)")
 }
 
 /**What happened on this day - onthisday.com*/
