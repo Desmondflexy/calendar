@@ -1,9 +1,7 @@
 const selectMonth = document.querySelector('select');
 const yearInput = document.querySelector('input');
-const enterBtn = document.querySelector('button');
-
 const timeNow = document.querySelector('footer');
-const month_year = document.querySelector('.month-year');
+
 const months = [
     'January',
     'February',
@@ -18,97 +16,73 @@ const months = [
     'November',
     'December'
 ];
-
-// Populate month select button with options
 months.forEach(month => {
-    const option = document.createElement('option')
-    option.textContent = option.value = month;
-    selectMonth.appendChild(option)
+    const option = document.createElement('option');
+    option.innerHTML = option.value = month;
+    selectMonth.append(option);
 })
 
-// Display current calendar date on page load.
 let now = new Date();
-createCalendar(months[now.getMonth()], now.getFullYear());
+let month = months[now.getMonth()];
+let year = now.getFullYear();
+createCalendar();
 
-// At the click of the enter button.
-enterBtn.addEventListener('click', (e) => {
-    createCalendar(selectMonth.value, yearInput.value);
-    e.preventDefault();
-})
+selectMonth.addEventListener('change', () => yearInput.focus());
+document.querySelector('form').addEventListener('submit', handleSubmit);
 
-// Add event listener to date footer: return to today when clicked
 timeNow.addEventListener('click', () => {
     now = new Date();
-    createCalendar(months[now.getMonth()], now.getFullYear());
+    month = months[now.getMonth()];
+    year = now.getFullYear();
+    createCalendar();
 })
 
-// Add event listener to prev and next month button
-
 document.querySelector('.prev').addEventListener('click', () => {
-    const MonthYear = month_year.textContent.split(' ')
-    let month = MonthYear[0], year = MonthYear[1];
     let m = months.indexOf(month) - 1;
-
     if (m < 0) {
-        year--;
-        createCalendar(months[11], year);
+        month = months[11];
+        year -= 1;
     } else {
-        createCalendar(months[m], year);
+        month = months[m];
     }
+    createCalendar();
 })
 
 document.querySelector('.next').addEventListener('click', () => {
-    const MonthYear = month_year.textContent.split(' ')
-    let month = MonthYear[0], year = MonthYear[1];
     let m = months.indexOf(month) + 1;
-
     if (m > 11) {
-        year++;
-        createCalendar(months[0], year);
+        month = months[0];
+        year += 1;
     } else {
-        createCalendar(months[m], year);
+        month = months[m];
     }
+    createCalendar();
 })
 
-// User input validation: disable enter btn if input invalid
-yearInput.addEventListener('input', () => {
-    if (yearInput.validity.rangeUnderflow || yearInput.validity.rangeOverflow) {
-        yearInput.setCustomValidity('Input must be within 1582 and 2100');
-        yearInput.reportValidity();
-        enterBtn.disabled = true;
-    } else {
-        yearInput.setCustomValidity("");
-        enterBtn.disabled = false;
-    }
-})
-
-// Changes the time display on the red footer every second
+// Changes the time display on the footer every second
 setInterval(() => {
     now = new Date();
-    timeNow.textContent = `${now.toDateString()}, ${now.toLocaleTimeString()}`;
+    timeNow.innerHTML = `${now.toDateString()}, ${now.toLocaleTimeString()}`;
 }, 1000);
 
-/**List out the number of days in month of year. */
-function createCalendar(month, year) {
+function createCalendar() {
     // Validates inputs entered from the browser console. Just for debugging sakes.
     if (!(months.includes(month)) || year < 1582 || year > 2100) {
-        console.log('Error in createCalendar: Invalid input.')
-        return;
+        throw ('Error in createCalendar: Invalid input.')
     }
 
     // Update the values on the form
     selectMonth.value = month;
     yearInput.value = year;
-
-    month_year.textContent = `${month} ${year}`;
+    document.querySelector('.month-year').innerHTML = `${month} ${year}`;
 
     const weekdays = document.querySelector('.weekdays');
     weekdays.innerHTML = '';
-    for (let i of ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun']) {
+    ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'].forEach(name => {
         const weekday = document.createElement('li');
-        weekday.textContent = i;
-        weekdays.appendChild(weekday);
-    }
+        weekday.innerHTML = name;
+        weekdays.append(weekday);
+    })
 
     let countdays = 0, daysOfMonth, flag = false;
     // This loop counts the days from 1 up to the month in the given year
@@ -117,7 +91,6 @@ function createCalendar(month, year) {
             if (mm === 1) {  // February
                 if (yyyy % 4 === 0 && yyyy % 100 !== 0 || yyyy % 400 === 0) {  // Leap year
                     daysOfMonth = 29;
-
                 } else { // other year
                     daysOfMonth = 28;
                 }
@@ -143,28 +116,34 @@ function createCalendar(month, year) {
     for (let i = 1; i <= (countdays - daysOfMonth) % 7; i++) {
         const day = document.createElement('li');
         day.id = 'empty-day';
-        days.appendChild(day);
+        days.append(day);
     }
     // Fill numbered days of month
     for (let i = 1; i <= daysOfMonth; i++) {
         const day = document.createElement('li');
         day.innerHTML = `<a href="${googleSearch(i, month, year)}">${i}</a>`
-        days.appendChild(day);
+        days.append(day);
         if (Number(year) === now.getFullYear() && month === months[now.getMonth()] && i === now.getDate()) {
             day.id = 'today';
-            day.innerHTML = `<a href="https://www.britannica.com/on-this-day">${i}</a>`
         }
     }
 }
 
-/**What happened on this day - onthisday.com*/
-function onthisday(day, month, year) {
-    const query = `${year}/${month}/${day}`;
-    return 'https://www.onthisday.com/date/' + query;
-}
-
-/**Search this date on google.com */
 function googleSearch(day, month, year) {
     const query = `${day}+${month}+${year}`;
     return 'https://www.google.com/search?q=' + query;
 }
+
+function handleSubmit(e) {
+    e.preventDefault();
+    month = selectMonth.value;
+    year = Number(yearInput.value);
+    yearInput.blur();
+    createCalendar();
+}
+
+// /**What happened on this day - onthisday.com*/
+// function onthisday(day, month, year) {
+//   const query = `${year}/${month}/${day}`;
+//   return 'https://www.onthisday.com/date/' + query;
+// }
