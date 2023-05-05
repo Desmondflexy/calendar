@@ -1,38 +1,37 @@
 const selectMonth = document.querySelector('select');
 const yearInput = document.querySelector('input');
-const weekdays = document.querySelector('.weekdays');
 const timeNow = document.querySelector('footer');
 const calendarHeader = document.querySelector('.month-year');
 const days = document.querySelector('.days');
 const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
+    'January', 'February', 'March', 'April',
+    'May', 'June', 'July', 'August',
+    'September', 'October', 'November', 'December'
 ];
+const weekdays = ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'];
 
 months.forEach(month => {
     const option = document.createElement('option');
     option.innerHTML = option.value = month;
     selectMonth.append(option);
 });
-['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'].forEach(wk => {
+
+weekdays.forEach(week => {
     const weekday = document.createElement('li');
-    weekday.innerHTML = wk;
-    weekdays.append(weekday);
+    weekday.innerHTML = week;
+    document.querySelector('.weekdays').append(weekday);
 });
 
 let now = new Date();
 let month = months[now.getMonth()];
 let year = now.getFullYear();
+
+// Updates the value of 'now' every second
+setInterval(() => {
+    now = new Date();
+    timeNow.innerHTML = `${now.toDateString()}, ${now.toLocaleTimeString()}`;
+}, 1);
+
 createCalendar();
 
 selectMonth.addEventListener('change', () => yearInput.focus());
@@ -72,12 +71,6 @@ timeNow.addEventListener('click', () => {
     year = now.getFullYear();
     createCalendar();
 });
-
-// Updates the value of 'now' every second
-setInterval(() => {
-    now = new Date();
-    timeNow.innerHTML = `${now.toDateString()}, ${now.toLocaleTimeString()}`;
-}, 1);
 
 function createCalendar() {
     const [countdays, daysOfMonth] = countDateTime();
