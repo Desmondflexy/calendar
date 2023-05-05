@@ -1,5 +1,6 @@
-@import url(https://fonts.googleapis.com/css?family=Lobster);
+@import url('https://fonts.googleapis.com/css?family=Lobster');
 @import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel&display=swap');
 
 * {
   box-sizing: border-box;
@@ -76,7 +77,8 @@ footer {
 }
 
 #submit>button:hover {
-  background-color: aliceblue;
+  background-color: seagreen;
+  color: #fff;
 }
 
 .calendar {
@@ -94,6 +96,7 @@ h1 {
   text-align: center;
   color: #fff;
   border-radius: 8px;
+  font-family: 'Cinzel', serif;
 }
 
 h1 .btn {
@@ -176,7 +179,7 @@ h1 .next {
   background-color: rgba(0, 200, 0, .5);
 }
 
-#empty-day {
+.empty-day {
   opacity: .4
 }
 
