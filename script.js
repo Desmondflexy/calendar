@@ -30,14 +30,10 @@ createCalendar();
 selectMonth.addEventListener('change', () => yearInput.focus());
 document.querySelector('form').addEventListener('submit', handleSubmit);
 
-timeNow.addEventListener('click', () => {
-    now = new Date();
-    month = months[now.getMonth()];
-    year = now.getFullYear();
-    createCalendar();
-})
-
 document.querySelector('.prev').addEventListener('click', () => {
+    if (year.toString() === yearInput.getAttribute('min') && month === months[0]){
+        return;
+    }
     let m = months.indexOf(month) - 1;
     if (m < 0) {
         month = months[11];
@@ -49,6 +45,9 @@ document.querySelector('.prev').addEventListener('click', () => {
 })
 
 document.querySelector('.next').addEventListener('click', () => {
+    if (year.toString() === yearInput.getAttribute('max') && month === months[11]){
+        return;
+    }
     let m = months.indexOf(month) + 1;
     if (m > 11) {
         month = months[0];
@@ -56,6 +55,12 @@ document.querySelector('.next').addEventListener('click', () => {
     } else {
         month = months[m];
     }
+    createCalendar();
+})
+
+timeNow.addEventListener('click', () => {
+    month = months[now.getMonth()];
+    year = now.getFullYear();
     createCalendar();
 })
 
@@ -67,7 +72,7 @@ setInterval(() => {
 
 function createCalendar() {
     // Validates inputs entered from the browser console. Just for debugging sakes.
-    if (!(months.includes(month)) || year < 1582 || year > 2100) {
+    if (!(months.includes(month)) || year < yearInput.getAttribute('min') || year > yearInput.getAttribute('max')) {
         throw ('Error in createCalendar: Invalid input.')
     }
 
@@ -123,7 +128,7 @@ function createCalendar() {
         const day = document.createElement('li');
         day.innerHTML = `<a href="${googleSearch(i, month, year)}">${i}</a>`
         days.append(day);
-        if (Number(year) === now.getFullYear() && month === months[now.getMonth()] && i === now.getDate()) {
+        if (year === now.getFullYear() && month === months[now.getMonth()] && i === now.getDate()) {
             day.id = 'today';
         }
     }
