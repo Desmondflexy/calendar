@@ -69,11 +69,6 @@ function createCalendar() {
     }
 }
 
-function googleSearch(day, month, year) {
-    const query = `${day}+${month}+${year}`;
-    return 'https://www.google.com/search?q=' + query;
-}
-
 function handleSubmit(e) {
     e.preventDefault();
     month = selectMonth.value;
@@ -82,9 +77,9 @@ function handleSubmit(e) {
     createCalendar();
 }
 
-function countDateTime() {
+function countDateTime(startyear=1) {
     let [countdays, daysOfMonth] = [0, 0];
-    for (let y = 1; y <= year; y++) {
+    for (let y = startyear; y <= year; y++) {
         let stopCount = false;
         for (let m = 0; m < 12; m++) {
             if (m === 1) {  // February
@@ -141,4 +136,9 @@ function gotoToday(){
     month = months[now.getMonth()];
     year = now.getFullYear();
     createCalendar();
+}
+
+function googleSearch(day, month, year) {
+    const query = `${day}+${month}+${year}`;
+    return 'https://www.google.com/search?q=' + query;
 }
