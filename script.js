@@ -26,7 +26,7 @@ let now = new Date();
 let month = months[now.getMonth()];
 let year = now.getFullYear();
 
-// Updates the value of 'now' every second
+// Updates the value of 'now' every millisecond
 setInterval(() => {
     now = new Date();
     timeNow.innerHTML = `${now.toDateString()}, ${now.toLocaleTimeString()}`;
@@ -35,42 +35,11 @@ setInterval(() => {
 createCalendar();
 
 selectMonth.addEventListener('change', () => yearInput.focus());
-document.querySelector('form').addEventListener('submit', handleSubmit);
 yearInput.addEventListener('input', () => yearInput.value = Number(yearInput.value).toString().padStart(4, 0));
-
-document.querySelector('.prev').addEventListener('click', () => {
-    if (year.toString() === yearInput.getAttribute('min') && month === months[0]) {
-        return;
-    }
-    let m = months.indexOf(month) - 1;
-    if (m < 0) {
-        month = months[11];
-        year -= 1;
-    } else {
-        month = months[m];
-    }
-    createCalendar();
-});
-
-document.querySelector('.next').addEventListener('click', () => {
-    if (year.toString() === yearInput.getAttribute('max') && month === months[11]) {
-        return;
-    }
-    let m = months.indexOf(month) + 1;
-    if (m > 11) {
-        month = months[0];
-        year += 1;
-    } else {
-        month = months[m];
-    }
-    createCalendar();
-});
-
-timeNow.addEventListener('click', () => {
-    month = months[now.getMonth()];
-    year = now.getFullYear();
-    createCalendar();
-});
+document.querySelector('form').addEventListener('submit', handleSubmit);
+document.querySelector('.prev').addEventListener('click', gotoPrevMonth);
+document.querySelector('.next').addEventListener('click', gotoNextMonth);
+timeNow.addEventListener('click', gotoToday);
 
 function createCalendar() {
     const [countdays, daysOfMonth] = countDateTime();
@@ -86,6 +55,7 @@ function createCalendar() {
         const day = document.createElement('li');
         day.className = 'empty-day';
         days.append(day);
+        // day.onclick = gotoPrevMonth;
     }
     // Fill numbered days of month
     for (let i = 1; i <= daysOfMonth; i++) {
@@ -139,8 +109,36 @@ function countDateTime() {
     return [countdays, daysOfMonth];
 }
 
-// /**What happened on this day - onthisday.com*/
-// function onthisday(day, month, year) {
-//   const query = `${year}/${month}/${day}`;
-//   return 'https://www.onthisday.com/date/' + query;
-// }
+function gotoPrevMonth() {
+    if (year.toString() === yearInput.getAttribute('min') && month === months[0]) {
+        return;
+    }
+    let m = months.indexOf(month) - 1;
+    if (m < 0) {
+        month = months[11];
+        year -= 1;
+    } else {
+        month = months[m];
+    }
+    createCalendar();
+}
+
+function gotoNextMonth() {
+    if (year.toString() === yearInput.getAttribute('max') && month === months[11]) {
+        return;
+    }
+    let m = months.indexOf(month) + 1;
+    if (m > 11) {
+        month = months[0];
+        year += 1;
+    } else {
+        month = months[m];
+    }
+    createCalendar();
+}
+
+function gotoToday(){
+    month = months[now.getMonth()];
+    year = now.getFullYear();
+    createCalendar();
+}
