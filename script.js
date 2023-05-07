@@ -25,12 +25,7 @@ weekdays.forEach(week => {
 let now = new Date();
 let month = months[now.getMonth()];
 let year = now.getFullYear();
-
-// Updates the value of 'now' every millisecond
-setInterval(() => {
-    now = new Date();
-    timeNow.innerHTML = `${now.toDateString()}, ${now.toLocaleTimeString()}`;
-}, 1);
+timeNow.innerHTML = `${now.toDateString()}, ${now.toLocaleTimeString()}`;
 
 createCalendar();
 
@@ -40,6 +35,12 @@ document.querySelector('form').addEventListener('submit', handleSubmit);
 document.querySelector('.prev').addEventListener('click', gotoPrevMonth);
 document.querySelector('.next').addEventListener('click', gotoNextMonth);
 timeNow.addEventListener('click', gotoToday);
+
+// Updates the value of 'now' every second
+setInterval(() => {
+    now = new Date();
+    timeNow.innerHTML = `${now.toDateString()}, ${now.toLocaleTimeString()}`;
+}, 1000);
 
 function createCalendar() {
     const [countdays, daysOfMonth] = countDateTime();
