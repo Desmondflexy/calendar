@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Lobster');
+/* @import url('https://fonts.googleapis.com/css?family=Lobster'); */
 @import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cinzel&display=swap');
 
@@ -181,10 +181,6 @@ h1 .next {
 
 .empty-day {
   opacity: .4
-}
-
-#today:active {
-  box-shadow: 0 0 0 gray;
 }
 
 footer {
