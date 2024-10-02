@@ -42,7 +42,7 @@ function main() {
     // Updates the value of 'now' every second
     setInterval(() => {
         now = new Date();
-        timeNow.innerHTML = `${now.toLocaleDateString()}, ${now.toLocaleTimeString()}`;
+        timeNow.innerHTML = `${now.toDateString()}, ${now.toLocaleTimeString()}`;
     }, 1000);
 
     function createCalendar() {
